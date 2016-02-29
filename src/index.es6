@@ -1,14 +1,8 @@
 import pym from "pym.js"
 
 class Lunicorn {
-  constructor(parentDomID, iframeUrl) {
-    this.parentDomID = parentDomID
-    this.iframeUrl = iframeUrl
-    this.iframeCrosser = this.createIframeCrosser()
-  }
-
-  createIframeCrosser(){
-    return new pym.Parent(this.parentDomID, this.iframeUrl, {})
+  constructor(iframeCrosser) {
+    this.iframeCrosser = iframeCrosser
   }
 
   sendMessage(messageType, message){
@@ -20,8 +14,14 @@ class Lunicorn {
       cb(JSON.parse(data))
     })
   }
-}
 
-Lunicorn.Consumer = pym.Child
+  static createIframe(parentDomID, iframeUrl) {
+    return new Lunicorn(new pym.Parent(parentDomID, iframeUrl, {}))
+  }
+
+  static consumeIframe(pollingInterval=100) {
+    return new Lunicorn(new pym.Child({polling: pollingInterval}))
+  }
+}
 
 export { Lunicorn }
