@@ -19,7 +19,7 @@ class Lunicorn {
     return new Lunicorn(new pym.Parent(parentDomID, iframeUrl, {}))
   }
 
-  static consumeIframe(pollingInterval=100) {
+  static consumeIframe(pollingInterval=2000) {
     return new Lunicorn(new pym.Child({polling: pollingInterval}))
   }
 }
