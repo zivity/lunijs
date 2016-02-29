@@ -22,4 +22,6 @@ class Lunicorn {
   }
 }
 
+Lunicorn.Consumer = pym.Child
+
 export { Lunicorn }
