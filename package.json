@@ -4,7 +4,25 @@
   "version": "1.0.0",
   "description": "lunicorn js consumer",
   "main": "index.js",
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "presets": [
+            "es2015"
+          ],
+          "extensions": [
+            ".es6"
+          ]
+        }
+      ]
+    ]
+  },
+
   "scripts": {
+    "build": "browserify src/index.es6 -o lib/index.js --extensions=.es6",
+    "build:dev": "watchify src/index.es6 -o lib/index.js --extensions=.es6",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,5 +34,11 @@
   "bugs": {
     "url": "https://github.com/zivity/lunijs/issues"
   },
-  "homepage": "https://github.com/zivity/lunijs#readme"
+  "homepage": "https://github.com/zivity/lunijs#readme",
+  "devDependencies": {
+    "babel-preset-es2015": "^6.5.0",
+    "babelify": "^7.2.0",
+    "browserify": "^13.0.0",
+    "watchify": "^3.7.0"
+  }
 }
