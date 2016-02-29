@@ -20,7 +20,9 @@ class Lunicorn {
   }
 
   static consumeIframe(pollingInterval=2000) {
-    return new Lunicorn(new pym.Child({polling: pollingInterval}))
+    let child = new pym.Child({polling: pollingInterval})
+    child.sendHeight()
+    return new Lunicorn(child)
   }
 }
 
