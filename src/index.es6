@@ -17,13 +17,13 @@ class Lunicorn {
   }
 
   static createIframe(parentDomID, iframeUrl) {
-    return new Lunicorn(new pym.Parent(parentDomID, iframeUrl, {}))
+    return new this(new pym.Parent(parentDomID, iframeUrl, {}))
   }
 
   static consumeIframe(pollingInterval=2000) {
     let child = new pym.Child({polling: pollingInterval})
     child.sendHeight()
-    return new Lunicorn(child)
+    return new this(child)
   }
 }
 
