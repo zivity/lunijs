@@ -6,6 +6,7 @@ class Lunicorn {
   }
 
   sendMessage(messageType, message){
+    message = message || {} //pym doesn fire the callback if message is undefined
     this.iframeCrosser.sendMessage(messageType, JSON.stringify(message))
   }
 
