@@ -5,7 +5,9 @@
 var _index = require("./index");
 
 global.Lunicorn = _index.Lunicorn;
+
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+
 },{"./index":2}],2:[function(require,module,exports){
 "use strict";
 
@@ -64,6 +66,7 @@ var Lunicorn = function () {
 }();
 
 exports.Lunicorn = Lunicorn;
+
 },{"pym.js":3}],3:[function(require,module,exports){
 /*! pym.js - v0.4.4 - 2015-07-16 */
 /*
@@ -652,4 +655,5 @@ exports.Lunicorn = Lunicorn;
     return lib;
 });
 
-},{}]},{},[1]);
+},{}]},{},[1])
+//# sourceMappingURL=lunicorn-0.1.0.js.map
