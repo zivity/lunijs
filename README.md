@@ -4,6 +4,7 @@
 ## installing
 
 download the packaged files in /dist (.min.js should work, but may be buggy)
+these files contain pym.js, so if your project already includes pym, you'll want to build an alternate.
 
 or
 
@@ -23,6 +24,7 @@ you could npm at the github version of the module if you play that way.
 ```
 
 ### et VIOLA!
+
 
 
 #### Todo:
