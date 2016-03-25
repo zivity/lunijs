@@ -11,7 +11,7 @@ you could npm at the github version of the module if you play that way.
 
 ## using
 ```html
-<script src=lunicorn-0.0.5.js></script>
+<script src='lunicorn-0.1.0.js'></script>
 <div id="gimme-an-iframe"></div>
 
 <script>
