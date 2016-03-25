@@ -55,6 +55,7 @@ var Lunicorn = function () {
   return Lunicorn;
 }();
 
+exports.default = Lunicorn;
 exports.Lunicorn = Lunicorn;
 },{"pym.js":2}],2:[function(require,module,exports){
 /*! pym.js - v0.4.4 - 2015-07-16 */
