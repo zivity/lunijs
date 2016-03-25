@@ -29,4 +29,4 @@ class Lunicorn {
 
 
 export default Lunicorn
-export { Lunicorn }
+//export { Lunicorn }
