@@ -5,11 +5,12 @@
   "description": "lunicorn js consumer",
   "main": "lib/index.js",
   "scripts": {
-    "build": "babel src --presets babel-preset-es2015 --out-dir lib",
-    "deploy": "npm run build && npm run package && npm run uglify",
-    "package": "rm -rf dist/* && browserify lib/index.js -o dist/lunicorn-$npm_package_version.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "uglify": "uglifyjs  dist/lunicorn-$npm_package_version.js -o dist/lunicorn-$npm_package_version.min.js -c -m -r Lunicorn"
+    "build": "npm run clean && npm run build:babel && npm run build:browserify && npm run build:uglify",
+    "build:babel": "babel src --presets babel-preset-es2015 --out-dir lib",
+    "build:browserify": "browserify lib/index.js -o dist/lunicorn-$npm_package_version.js",
+    "build:uglify": "uglifyjs  dist/lunicorn-$npm_package_version.js -o dist/lunicorn-$npm_package_version.min.js -c -m -r Lunicorn",
+    "clean": "rm -rf lib/* dist/*",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
