@@ -1,13 +1,13 @@
 {
   "name": "lunicorn",
   "private": true,
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "lunicorn js consumer",
   "main": "lib/index.js",
   "scripts": {
     "build": "npm-run-all clean build:babel build:browserify build:uglify",
     "build:babel": "babel src --presets babel-preset-es2015 --out-dir lib",
-    "build:browserify": "browserify lib/index.js -o dist/lunicorn-$npm_package_version.js --standalone Lunicorn",
+    "build:browserify": "browserify lib/browser.js -o dist/lunicorn-$npm_package_version.js",
     "build:uglify": "uglifyjs  dist/lunicorn-$npm_package_version.js -o dist/lunicorn-$npm_package_version.min.js -c -m -r Lunicorn",
     "clean": "rm -rf lib/* dist/*",
     "test": "echo \"Error: no test specified\" && exit 1"
