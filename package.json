@@ -1,9 +1,9 @@
 {
   "name": "lunicorn",
-  "private": true,
   "version": "0.1.0",
   "description": "lunicorn js consumer",
   "main": "lib/index.js",
+  "license": "MIT",
   "scripts": {
     "build": "npm-run-all clean build:babel build:browserify build:uglify",
     "build:babel": "babel src --presets babel-preset-es2015 --out-dir lib --source-maps inline",
