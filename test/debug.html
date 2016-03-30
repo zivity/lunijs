@@ -1,0 +1,23 @@
+<div id="boom"></div>
+
+<script>
+  debugCreateIframe("boom", "http://localhost:5000/external_widget/betsy1")
+
+  function debugCreateIframe(parentId, iframeUrl, urlParamRegex) {
+    urlParamRegex = urlParamRegex || /lunicorn_debug/
+    if (window.location.href.match(urlParamRegex)) {
+      asyncCreateIframe(parentId, iframeUrl)
+    }
+  }
+
+  function asyncCreateIframe(parendId, iframeUrl) {
+    var script = document.createElement("script")
+    script.async = true
+    script.onload = function() {
+      Lunicorn.createIframe(parendId, iframeUrl)
+    }
+
+    document.body.appendChild(script)
+    script.setAttribute("src", "https://npmcdn.com/lunicorn@0.1.0/dist/lunicorn-0.1.0.js")
+  }
+</script>
