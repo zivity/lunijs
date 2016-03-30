@@ -1,11 +1,24 @@
+<!-- throw a div in your markup where you want the iframe to go, give it a unique ID -->
+
 <div id="boom"></div>
+
+<!--
+  this is the debug version of the javascript, put it somewhere after the div (the bottom of the body tag works fine)
+  change the parameters passed to debugCreateIframe to be the id of your div, and the url of the site
+  this version will only do anything when the site is viewed with a special query parameter (lunicorn_debug by default)
+  so to check it out go to:
+   https://yoursite.com?lunicorn_debug=yup
+  You should not see anything if you go to yoursite.com without the query param.
+-->
 
 <script>
   debugCreateIframe("boom", "http://localhost:5000/external_widget/betsy1")
 
-  function debugCreateIframe(parentId, iframeUrl, urlParamRegex) {
-    urlParamRegex = urlParamRegex || /lunicorn_debug/
-    if (window.location.href.match(urlParamRegex)) {
+  function debugCreateIframe(parentId, iframeUrl, urlParam) {
+    urlParam = urlParam || "lunicorn_debug"
+    var hasParam = window.location.href.indexOf(urlParam) !== -1
+
+    if (hasParam) {
       asyncCreateIframe(parentId, iframeUrl)
     }
   }
