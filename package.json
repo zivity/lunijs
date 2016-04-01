@@ -10,7 +10,8 @@
     "build:browserify": "browserify lib/browser.js -d | exorcist dist/lunicorn-$npm_package_version.js.map > dist/lunicorn-$npm_package_version.js",
     "build:uglify": "uglifyjs  dist/lunicorn-$npm_package_version.js -c -m -r Lunicorn -o dist/lunicorn-$npm_package_version.min.js --source-map dist/lunicorn-$npm_package_version.min.js.map --in-source-map dist/lunicorn-$npm_package_version.js.map --source-map-include-sources -p relative",
     "clean": "rm -rf lib/* dist/*",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "npm run build:babel -- -w"
   },
   "repository": {
     "type": "git",
