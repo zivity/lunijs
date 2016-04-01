@@ -41,7 +41,6 @@ class FlashMessage{
   }
 
   remove() {
-    console.log("wats")
     this.el.remove()
   }
 }

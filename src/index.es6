@@ -19,7 +19,6 @@ class Lunicorn {
 
   addFlashHandler() {
     this.addHandler("flash", (data)=> {
-      console.log(data)
       let kind;
       for (kind in data) {
         this.addFlash(kind, data[kind])
