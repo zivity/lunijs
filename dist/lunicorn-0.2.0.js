@@ -8,7 +8,90 @@ global.Lunicorn = _index.Lunicorn;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"./index":2}],2:[function(require,module,exports){
+},{"./index":3}],2:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var FlashFactory = function () {
+  function FlashFactory() {
+    var containerId = arguments.length <= 0 || arguments[0] === undefined ? "lunicorn_flash" : arguments[0];
+
+    _classCallCheck(this, FlashFactory);
+
+    this.container = this.createContainer(containerId);
+  }
+
+  _createClass(FlashFactory, [{
+    key: "addFlash",
+    value: function addFlash(kind, message) {
+      var flashTimeoutMS = arguments.length <= 2 || arguments[2] === undefined ? 7000 : arguments[2];
+
+      var flash = new FlashMessage(kind, message);
+      this.container.appendChild(flash.el);
+      flash.scrollTo();
+      setTimeout(flash.remove.bind(flash), flashTimeoutMS);
+      return flash;
+    }
+  }, {
+    key: "createContainer",
+    value: function createContainer(containerId) {
+      var container = document.createElement("div");
+      container.id = containerId;
+      document.body.insertBefore(container, document.body.childNodes[0]);
+      return container;
+    }
+  }]);
+
+  return FlashFactory;
+}();
+
+var FlashMessage = function () {
+  function FlashMessage(kind, text) {
+    _classCallCheck(this, FlashMessage);
+
+    this.el = this.createElement(kind);
+    this.message = this.sanitizeMessage(text);
+    this.el.appendChild(this.message);
+  }
+
+  _createClass(FlashMessage, [{
+    key: "sanitizeMessage",
+    value: function sanitizeMessage(text) {
+      return document.createTextNode(text);
+    }
+  }, {
+    key: "createElement",
+    value: function createElement(kind) {
+      var element = document.createElement("div");
+      element.className = kind;
+      return element;
+    }
+  }, {
+    key: "scrollTo",
+    value: function scrollTo() {
+      window.scrollTo(0, 0);
+    }
+  }, {
+    key: "remove",
+    value: function remove() {
+      console.log("wats");
+      this.el.remove();
+    }
+  }]);
+
+  return FlashMessage;
+}();
+
+exports.FlashFactory = FlashFactory;
+
+},{}],3:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -17,6 +100,8 @@ Object.defineProperty(exports, "__esModule", {
 exports.Lunicorn = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _flash_factory = require("./flash_factory");
 
 var _pym = require("pym.js");
 
@@ -46,10 +131,31 @@ var Lunicorn = function () {
         cb(JSON.parse(data));
       });
     }
+  }, {
+    key: "addFlashHandler",
+    value: function addFlashHandler() {
+      var _this = this;
+
+      this.addHandler("flash", function (data) {
+        console.log(data);
+        var kind = undefined;
+        for (kind in data) {
+          _this.addFlash(kind, data[kind]);
+        }
+      });
+    }
+  }, {
+    key: "addFlash",
+    value: function addFlash(kind, message) {
+      this._flashFactory = this._flashFactory || new _flash_factory.FlashFactory();
+      return this._flashFactory.addFlash(kind, message);
+    }
   }], [{
     key: "createIframe",
     value: function createIframe(parentDomID, iframeUrl) {
-      return new this(new _pym2.default.Parent(parentDomID, iframeUrl, {}));
+      var lunicorn = new this(new _pym2.default.Parent(parentDomID, iframeUrl, {}));
+      lunicorn.addFlashHandler();
+      return lunicorn;
     }
   }, {
     key: "consumeIframe",
@@ -67,7 +173,7 @@ var Lunicorn = function () {
 
 exports.Lunicorn = Lunicorn;
 
-},{"pym.js":3}],3:[function(require,module,exports){
+},{"./flash_factory":2,"pym.js":4}],4:[function(require,module,exports){
 /*! pym.js - v0.4.4 - 2015-07-16 */
 /*
 * Pym.js is library that resizes an iframe based on the width of the parent and the resulting height of the child.
@@ -656,4 +762,4 @@ exports.Lunicorn = Lunicorn;
 });
 
 },{}]},{},[1])
-//# sourceMappingURL=lunicorn-0.1.0.js.map
+//# sourceMappingURL=lunicorn-0.2.0.js.map

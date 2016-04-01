@@ -1,6 +1,6 @@
 {
   "name": "lunicorn",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "lunicorn js consumer",
   "main": "lib/index.js",
   "license": "MIT",
