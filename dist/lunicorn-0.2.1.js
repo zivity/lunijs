@@ -81,7 +81,6 @@ var FlashMessage = function () {
   }, {
     key: "remove",
     value: function remove() {
-      console.log("wats");
       this.el.remove();
     }
   }]);
@@ -137,7 +136,6 @@ var Lunicorn = function () {
       var _this = this;
 
       this.addHandler("flash", function (data) {
-        console.log(data);
         var kind = undefined;
         for (kind in data) {
           _this.addFlash(kind, data[kind]);
@@ -762,4 +760,4 @@ exports.Lunicorn = Lunicorn;
 });
 
 },{}]},{},[1])
-//# sourceMappingURL=lunicorn-0.2.0.js.map
+//# sourceMappingURL=lunicorn-0.2.1.js.map
